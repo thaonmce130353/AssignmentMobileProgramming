@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#DDD">
 
     <FrameLayout
         android:id="@+id/frameSearch"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_margin="15dp"
             android:hint="Search..."
-
+            android:inputType="text"
             android:drawableRight="@drawable/search"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -54,5 +54,46 @@
         app:slideInterval="3000"
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:background="@drawable/background_types"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_type"
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="65dp"/>
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
