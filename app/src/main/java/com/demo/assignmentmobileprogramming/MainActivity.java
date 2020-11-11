@@ -60,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_profile:
                         fragment = new SettingFragment();
                         break;
+                    case R.id.navigation_map:
+                        fragment = new SettingFragment();
+                        break;
                 }
 
                 transaction.replace(R.id.mainframe, fragment);

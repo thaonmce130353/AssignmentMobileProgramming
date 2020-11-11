@@ -2,6 +2,7 @@
     <string name="app_name">AssignmentMobileProgramming</string>
     <string name="title_home">Home</string>
     <string name="title_history">History</string>
+    <string name="title_map">Map</string>
     <string name="title_notification">Notification</string>
     <string name="title_setting">Setting</string>
 </resources>
