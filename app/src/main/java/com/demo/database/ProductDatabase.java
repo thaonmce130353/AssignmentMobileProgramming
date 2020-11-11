@@ -123,10 +123,28 @@ public class ProductDatabase extends SQLiteOpenHelper {
             int percentSaleOff = cursor.getInt(5);
             boolean status = cursor.getInt(6) > 0;
             int typeId = cursor.getInt(7);
-            if(percentSaleOff > 0)
+            if (percentSaleOff > 0)
                 products.add(new Product(id, name, price, description, rate, percentSaleOff, status, typeId));
         }
         return products;
+    }
+
+    public Product findProductById(int productId) {
+        Product p = null;
+        String sql = String.format("SELECT * FROM %s WHERE id = %d", TABLE_PRODUCT, productId);
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String description = cursor.getString(3);
+            float rate = cursor.getFloat(4);
+            int percentSaleOff = cursor.getInt(5);
+            boolean status = cursor.getInt(6) > 0;
+            int typeId = cursor.getInt(7);
+            p = new Product(id, name, price, description, rate, percentSaleOff, status, typeId);
+        }
+        return p;
     }
 
     @Override

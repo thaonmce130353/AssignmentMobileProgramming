@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements ImageClickListener, View.O
 
         recyclerViewType.setAdapter(typeAdapter);
 
-        RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product);
+        RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product_detail);
         recyclerViewProduct.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewProduct.setLayoutManager(gridLayoutManager);

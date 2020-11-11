@@ -3,6 +3,7 @@ package com.demo.custom.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.ImageDatabase;
+import com.demo.fragment.ProductDetailFragment;
 import com.demo.object.info.Image;
 import com.demo.object.info.Product;
 
@@ -24,7 +27,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     ArrayList<Product> products;
     Context context;
     ImageDatabase dbImage;
-
+    MainActivity mainActivity;
     public ProductListAdapter(ArrayList<Product> products, Context context) {
         this.products = products;
         this.context = context;
@@ -41,7 +44,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         ArrayList<Image> images = dbImage.getImageByProductId(products.get(position).getId());
         if (images.size() != 0) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length);
@@ -50,6 +53,17 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             holder.imgFood.setImageResource(R.drawable.dessert);
         holder.txtFoodName.setText(reduceString(products.get(position).getName()));
         holder.txtPrice.setText(String.format("%1$,.2f$", products.get(position).getPrice()));
+
+        holder.txtBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               try {
+                   MainActivity.openDetailFragment(products.get(position).getId());
+               } catch (Exception e) {
+                   Log.i("Nhan", e.getMessage());
+               }
+            }
+        });
     }
 
     @Override

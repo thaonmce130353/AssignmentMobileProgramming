@@ -1,10 +1,5 @@
 package com.demo.assignmentmobileprogramming;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,15 +7,21 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.demo.fragment.HistoryFragment;
 import com.demo.fragment.HomeFragment;
 import com.demo.fragment.NotificationFragment;
+import com.demo.fragment.ProductDetailFragment;
 import com.demo.fragment.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    FragmentManager manager;
+    static FragmentManager manager;
     private ActionBar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener() {
         return new BottomNavigationView.OnNavigationItemSelectedListener() {
-
 
 
             @Override
@@ -66,9 +66,21 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 transaction.replace(R.id.mainframe, fragment);
+                transaction.addToBackStack(null);
                 transaction.commit();
                 return true;
             }
         };
+    }
+
+    public static void openDetailFragment(int productId) {
+        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("productId", productId);
+        productDetailFragment.setArguments(bundle);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainframe, productDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
