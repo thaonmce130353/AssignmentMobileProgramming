@@ -25,7 +25,14 @@ public class ProductDatabase extends SQLiteOpenHelper {
     public void init() {
         if (getAllProduct().size() == 0) {
             addNew(new Product(0, "Tiger", 0.9, "Tiger is a light beer", 4.5F, 0, true, 5));
+            addNew(new Product(0, "Basic Chicken", 2, "This comfort food classic is just as flavorful and soul-satisfying as Grandma's chicken soup, but where hers took several hours-or a day-to make, ours takes under an hour", 4.5F, 10, true, 3));
+            addNew(new Product(0, "Mixed berry mousse", 1.5, "A mousse is always a great dessert option, thanks to its texture and its simplicity. Especially now that artisanal food and authentic flavors are in vogue ", 4.0F, 10, true, 4));
+            addNew(new Product(0, "Matcha cake", 2, "Matcha is still a leader in the health trend. It is commonly found in traditional Japanese mochi, as a filling, and as a base for cookies ", 4.0F, 0, true, 4));
+            addNew(new Product(0, "City Hot Pot", 9, "With Jpot gone, we find this to be the best local hotpot restaurant in town. Choose from 12 different soup bases like bak kut teh, prawn, kimchi and tom yum", 4.0F, 10, true, 1));
+            addNew(new Product(0, "Heineken", 1, "Heineken beer is sold in a green bottle with a red star", 4.0F, 0, true, 5));
+            addNew(new Product(0, "Egg Roll Skillet from Cooking Classy", 5, "This recipe really does taste like egg roll filling thanks to shredded cabbage and ground turkey", 4.0F, 0, true, 2));
         }
+
     }
 
     public void addNew(Product product) {
@@ -57,6 +64,67 @@ public class ProductDatabase extends SQLiteOpenHelper {
             int typeId = cursor.getInt(7);
 
             products.add(new Product(id, name, price, description, rate, percentSaleOff, status, typeId));
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductByType(int tId) {
+        ArrayList<Product> products = new ArrayList<>();
+        db = getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s WHERE typeId = %d", TABLE_PRODUCT, tId);
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String description = cursor.getString(3);
+            float rate = cursor.getFloat(4);
+            int percentSaleOff = cursor.getInt(5);
+            boolean status = cursor.getInt(6) > 0;
+            int typeId = cursor.getInt(7);
+
+            products.add(new Product(id, name, price, description, rate, percentSaleOff, status, typeId));
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductByName(String nameFood) {
+        ArrayList<Product> products = new ArrayList<>();
+        db = getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s WHERE name LIKE '%%%s%%'", TABLE_PRODUCT, nameFood);
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String description = cursor.getString(3);
+            float rate = cursor.getFloat(4);
+            int percentSaleOff = cursor.getInt(5);
+            boolean status = cursor.getInt(6) > 0;
+            int typeId = cursor.getInt(7);
+
+            products.add(new Product(id, name, price, description, rate, percentSaleOff, status, typeId));
+        }
+        return products;
+    }
+
+
+    public ArrayList<Product> getAllProductSaleOff() {
+        ArrayList<Product> products = new ArrayList<>();
+        db = getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s", TABLE_PRODUCT);
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            double price = cursor.getDouble(2);
+            String description = cursor.getString(3);
+            float rate = cursor.getFloat(4);
+            int percentSaleOff = cursor.getInt(5);
+            boolean status = cursor.getInt(6) > 0;
+            int typeId = cursor.getInt(7);
+            if(percentSaleOff > 0)
+                products.add(new Product(id, name, price, description, rate, percentSaleOff, status, typeId));
         }
         return products;
     }

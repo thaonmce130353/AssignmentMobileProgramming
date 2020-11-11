@@ -1,14 +1,17 @@
 package com.demo.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,59 +35,45 @@ import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment implements ImageClickListener {
+public class HomeFragment extends Fragment implements ImageClickListener, View.OnClickListener, ImageListener {
     private Button btnSearch;
+    private EditText txtSearch;
     FrameLayout frameLayoutSearch;
     CarouselView carouselView;
     TypeDatabase dbType;
     ProductDatabase dbProduct;
-    ImageDatabase dbImage;
     ArrayList<Type> types;
     ArrayList<Product> products;
+    ArrayList<Product> productSaleOff;
+    ButtonListAdapter typeAdapter;
+    ProductListAdapter productAdapter;
+    ImageDatabase dbImage;
+    ArrayList<Bitmap> imgsForCarousel;
     int[] sampleImages = {R.drawable.lau, R.drawable.soup, R.drawable.dessert, R.drawable.tradao, R.drawable.xao};
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
+        final View view = inflater.inflate(R.layout.home_fragment, container, false);
         dbType = new TypeDatabase(getActivity());
         dbProduct = new ProductDatabase(getActivity());
         dbImage = new ImageDatabase(getActivity());
-//        if (dbImage.getAllImage().size() == 0) {
-//            BitmapDrawable bitmapDrawable = (BitmapDrawable) getActivity().getResources().getDrawable(R.drawable.tiger);
-//            Bitmap bitmap = bitmapDrawable.getBitmap();
-//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-//            byte[] url = byteArrayOutputStream.toByteArray();
-//            dbImage.addNew(new Image(0, url, true, 1));
-//            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-//        }
-        types = dbType.getAllType();
+        types = new ArrayList<>();
+        types.add(new Type(-1, "ALL", true));
+        types.addAll(dbType.getAllType());
         products = dbProduct.getAllProduct();
-        Toast.makeText(getActivity(), "" + products, Toast.LENGTH_SHORT).show();
         btnSearch = view.findViewById(R.id.btnSearch);
+        txtSearch = view.findViewById(R.id.txtSearch);
         frameLayoutSearch = view.findViewById(R.id.frameSearch);
 
         frameLayoutSearch.setTranslationZ(1);
 
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Click", Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnSearch.setOnClickListener(this);
 
-        carouselView = view.findViewById(R.id.carouselView);
-        carouselView.setPageCount(5);
-        carouselView.setImageListener(new ImageListener() {
-            @Override
-            public void setImageForPosition(int position, ImageView imageView) {
-                imageView.setImageResource(sampleImages[position]);
-            }
-        });
+        init(view);
+        carouselView.setImageListener(this);
 
         carouselView.setImageClickListener(this);
 
@@ -93,25 +82,77 @@ public class HomeFragment extends Fragment implements ImageClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerViewType.setLayoutManager(layoutManager);
 
-        ButtonListAdapter adapter = new ButtonListAdapter(types, getActivity().getApplicationContext());
+        typeAdapter = new ButtonListAdapter(types, getActivity().getApplicationContext(), this);
 
-        recyclerViewType.setAdapter(adapter);
+        recyclerViewType.setAdapter(typeAdapter);
 
         RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product);
         recyclerViewProduct.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerViewProduct.setLayoutManager(gridLayoutManager);
 
-        ProductListAdapter productListAdapter = new ProductListAdapter(products, getActivity().getApplicationContext());
+        productAdapter = new ProductListAdapter(products, getActivity().getApplicationContext());
 
-        recyclerViewProduct.setAdapter(productListAdapter);
+        recyclerViewProduct.setAdapter(productAdapter);
         return view;
 
     }
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(getActivity(), "Click " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Click " + productSaleOff.get(position).getName(), Toast.LENGTH_SHORT).show();
     }
 
+    private void init(View view) {
+        productSaleOff = dbProduct.getAllProductSaleOff();
+        imgsForCarousel = new ArrayList<>();
+        for (Product p : productSaleOff) {
+            ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
+            if (images.size() != 0)
+                imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length));
+        }
+        carouselView = view.findViewById(R.id.carouselView);
+        if (imgsForCarousel.size() > 5)
+            carouselView.setPageCount(5);
+        else
+            carouselView.setPageCount(imgsForCarousel.size());
+    }
+
+    public void updateListProduct(int tId) {
+        products.clear();
+        if (tId == -1)
+            products.addAll(dbProduct.getAllProduct());
+        else
+            products.addAll(dbProduct.getProductByType(tId));
+        productAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * Onclick button
+     *
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        products.clear();
+        String searchStr = txtSearch.getText().toString();
+        products.addAll(dbProduct.getProductByName(searchStr));
+        for (Type type : types) {
+            String[] typeName = type.getName().split("\\s+");
+            for (String s : typeName) {
+                if (s.toLowerCase().equals(searchStr.toLowerCase())) {
+                    products.addAll(dbProduct.getProductByType(type.getId()));
+                    break;
+                }
+            }
+        }
+        productAdapter.notifyDataSetChanged();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    @Override
+    public void setImageForPosition(int position, ImageView imageView) {
+        imageView.setImageBitmap(imgsForCarousel.get(position));
+    }
 }

@@ -23,10 +23,11 @@ import java.util.ArrayList;
 public class ButtonListAdapter extends RecyclerView.Adapter<ButtonListAdapter.ViewHolder>{
     ArrayList<Type> types;
     Context context;
-
-    public ButtonListAdapter(ArrayList<Type> types, Context context) {
+    HomeFragment homeFragment;
+    public ButtonListAdapter(ArrayList<Type> types, Context context, HomeFragment homeFragment) {
         this.types = types;
         this.context = context;
+        this.homeFragment = homeFragment;
     }
 
     @NonNull
@@ -39,12 +40,12 @@ public class ButtonListAdapter extends RecyclerView.Adapter<ButtonListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.btnType.setText(types.get(position).getName());
         holder.btnType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(context, "ABC", Toast.LENGTH_SHORT).show();
+                homeFragment.updateListProduct(types.get(position).getId());
             }
         });
     }

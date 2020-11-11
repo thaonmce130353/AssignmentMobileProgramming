@@ -42,14 +42,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ArrayList<Image> images = dbImage.getAllImage();
-        Toast.makeText(context, "" + images.size(), Toast.LENGTH_SHORT).show();
+        ArrayList<Image> images = dbImage.getImageByProductId(products.get(position).getId());
         if (images.size() != 0) {
             Bitmap bitmap = BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length);
             holder.imgFood.setImageBitmap(bitmap);
         } else
             holder.imgFood.setImageResource(R.drawable.dessert);
-        holder.txtFoodName.setText(products.get(position).getName());
+        holder.txtFoodName.setText(reduceString(products.get(position).getName()));
         holder.txtPrice.setText(String.format("%1$,.2f$", products.get(position).getPrice()));
     }
 
@@ -70,5 +69,18 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             txtBuy = itemView.findViewById(R.id.txtBuy);
 
         }
+    }
+
+    private String reduceString(String str) {
+        String[] arr = str.split("\\s+");
+        String result = "";
+        int words = 0;
+        while (result.length() < 15 && words < arr.length){
+            result += arr[words] + " ";
+            words++;
+        }
+        if(words == arr.length)
+            return result;
+        return result.substring(0, result.length() - 1) + "...";
     }
 }

@@ -18,7 +18,7 @@ public class TypeDatabase extends SQLiteOpenHelper {
     SQLiteDatabase db;
 
     public TypeDatabase(@Nullable Context context) {
-        super(context, DB_NAME, null, 1);
+        super(context, TABLE_TYPE, null, 1);
         init();
     }
 
@@ -45,6 +45,20 @@ public class TypeDatabase extends SQLiteOpenHelper {
         ArrayList<Type> types = new ArrayList<>();
         db = getReadableDatabase();
         String sql = "SELECT * FROM Type";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            boolean status = cursor.getInt(2) > 0;
+            types.add(new Type(id, name, status));
+        }
+        return types;
+    }
+
+    public ArrayList<Type> getTypeByName(String nameType) {
+        ArrayList<Type> types = new ArrayList<>();
+        db = getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s WHERE name LIKE '%%%s%%'", TABLE_TYPE, nameType);
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
