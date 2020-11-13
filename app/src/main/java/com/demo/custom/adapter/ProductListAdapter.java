@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.ImageDatabase;
-import com.demo.fragment.ProductDetailFragment;
 import com.demo.object.info.Image;
 import com.demo.object.info.Product;
 
