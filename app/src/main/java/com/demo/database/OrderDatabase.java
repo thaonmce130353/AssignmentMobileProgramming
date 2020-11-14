@@ -52,6 +52,22 @@ public class OrderDatabase extends SQLiteOpenHelper {
         return orders;
     }
 
+    public ArrayList<Order> getAllOrderByUserId(int uId) {
+        ArrayList<Order> orders = new ArrayList<>();
+        db = getReadableDatabase();
+        String sql = "SELECT * FROM OrderFood WHERE userId = " + uId + " ";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            int tableId = cursor.getInt(4);
+            int userId = cursor.getInt(3);
+            float totalMoney = cursor.getFloat(1);
+            String orderDay = cursor.getString(2);
+            orders.add(new Order(id, totalMoney, orderDay, tableId, userId));
+        }
+        return orders;
+    }
+
     private void init() {
         if (getAllOrder().size() == 0) {
             addNewOrder(new Order(1, 50, "10/2/2020", 1, 1));
