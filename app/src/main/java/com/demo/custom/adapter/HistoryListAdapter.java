@@ -11,20 +11,24 @@ import android.widget.TextView;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.object.info.Order;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HistoryListAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
     private List<Order> orders;
+    private SimpleDateFormat format;
 
     public HistoryListAdapter(Context context, int layout, List<Order> orders) {
         this.context = context;
         this.layout = layout;
         this.orders = orders;
+        format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
     }
 
     @Override

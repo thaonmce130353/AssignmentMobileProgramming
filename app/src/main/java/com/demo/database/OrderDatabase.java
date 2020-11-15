@@ -70,11 +70,11 @@ public class OrderDatabase extends SQLiteOpenHelper {
 
     private void init() {
         if (getAllOrder().size() == 0) {
-            addNewOrder(new Order(1, 50, "10/2/2020", 1, 1));
-            addNewOrder(new Order(2, 40, "10/2/2020", 2, 2));
-            addNewOrder(new Order(3, 30, "09/2/2020", 3, 2));
-            addNewOrder(new Order(4, 20, "09/2/2020", 4, 3));
-            addNewOrder(new Order(5, 10, "08/2/2020", 5, 3));
+            addNewOrder(new Order(1, 50, "10-02-2020 08:25:36", 1, 1));
+            addNewOrder(new Order(2, 40, "10-02-2020 09:34:37", 2, 2));
+            addNewOrder(new Order(3, 30, "09-02-2020 12:27:37", 3, 2));
+            addNewOrder(new Order(4, 20, "09-02-2020 09:27:37", 4, 3));
+            addNewOrder(new Order(5, 10, "08-02-2020 04:27:37", 5, 3));
         }
     }
 
