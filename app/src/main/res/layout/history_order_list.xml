@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/orderImage"
+        android:src="@drawable/order"
+        android:padding="15dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        tools:ignore="InvalidId,MissingConstraints" />
+    <TextView
+        android:id="@+id/nameFood"
+        android:layout_toRightOf="@id/orderImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên food"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/priceFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="$38,00"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@id/orderImage"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/timeOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="8:00 AM"
+        android:textColor="#504A4A"
+        android:layout_toRightOf="@id/orderImage"
+        android:layout_marginLeft="190dp"/>
+</RelativeLayout>
