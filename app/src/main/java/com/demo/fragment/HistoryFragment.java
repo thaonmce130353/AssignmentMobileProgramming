@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.custom.adapter.HistoryListAdapter;
 import com.demo.database.ImageDatabase;
@@ -48,7 +49,7 @@ public class HistoryFragment  extends Fragment {
 
     HistoryListAdapter historyListAdapter;
 
-    private static final int userId = 2;
+    private static final int userId = MainActivity.userId;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
