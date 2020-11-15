@@ -43,7 +43,6 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
 
 
         Bundle bundle = getArguments();
-        Toast.makeText(getActivity(), "" + bundle.getInt("productId"), Toast.LENGTH_SHORT).show();
         p = dbProduct.findProductById(bundle.getInt("productId"));
         init(view, p);
 

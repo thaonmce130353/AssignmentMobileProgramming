@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.custom.adapter.ButtonListAdapter;
 import com.demo.custom.adapter.ProductListAdapter;
@@ -100,7 +101,7 @@ public class HomeFragment extends Fragment implements ImageClickListener, View.O
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(getActivity(), "Click " + productSaleOff.get(position).getName(), Toast.LENGTH_SHORT).show();
+        MainActivity.openDetailFragment(productSaleOff.get(position).getId());
     }
 
     private void init(View view) {
