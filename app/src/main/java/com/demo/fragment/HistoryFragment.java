@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +41,6 @@ import java.util.Locale;
 public class HistoryFragment  extends Fragment {
 
     private ListView listView;
-    private TextView txtCurrentOrder;
 
     OrderDatabase dbOrder;
 
@@ -67,7 +67,5 @@ public class HistoryFragment  extends Fragment {
         listView = view.findViewById(R.id.listView);
         dbOrder = new OrderDatabase(getActivity());
         orders = dbOrder.getAllOrderByUserId(userId);
-
-        txtCurrentOrder = view.findViewById(R.id.txtCurrentOrder);
     }
 }

@@ -32,7 +32,7 @@ public class OrderDatabase extends SQLiteOpenHelper {
         values.put("totalMoney", order.getTotalMoney());
         values.put("tableId", order.getTableId());
         values.put("userId", order.getUserId());
-        values.put("orderDay", String.valueOf(order.getOrderDay()));
+        values.put("orderDay", order.getOrderDay());
         db.insert(TABLE_TYPE, null, values);
     }
 
