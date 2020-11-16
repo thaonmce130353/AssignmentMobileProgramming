@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.demo.fragment.HistoryFragment;
 import com.demo.fragment.HomeFragment;
+import com.demo.fragment.MapsFragment;
 import com.demo.fragment.NotificationFragment;
 import com.demo.fragment.OrderDetailFragment;
 import com.demo.fragment.ProductDetailFragment;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new SettingFragment();
                         break;
                     case R.id.navigation_map:
-                        fragment = new SettingFragment();
+                        fragment = new MapsFragment();
                         break;
                 }
 
