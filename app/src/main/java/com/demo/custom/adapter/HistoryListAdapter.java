@@ -1,6 +1,7 @@
 package com.demo.custom.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.object.info.Order;
 
@@ -47,7 +49,7 @@ public class HistoryListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -65,6 +67,16 @@ public class HistoryListAdapter extends BaseAdapter {
         txtPrice.setText("$" + order.getTotalMoney());
         txtTime.setText(order.getOrderDay());
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    MainActivity.openDetailOrderFragment(orders.get(position).getOrderId());
+                } catch (Exception e) {
+                    Log.i("HistoryListAdapter: ", e.getMessage());
+                }
+            }
+        });
         return convertView;
     }
 }

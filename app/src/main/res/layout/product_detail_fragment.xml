@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginLeft="28dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:textSize="20sp"
         android:text="Relative product"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,5 +114,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTheSameProduct" />
+
+    <Button
+        android:id="@+id/btnBuyDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:textColor="@color/white"
+        android:background="@drawable/background_button_solid"
+        android:text="buy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

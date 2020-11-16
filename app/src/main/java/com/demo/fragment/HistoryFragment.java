@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.custom.adapter.HistoryListAdapter;
 import com.demo.database.ImageDatabase;
@@ -40,7 +42,6 @@ import java.util.Locale;
 public class HistoryFragment  extends Fragment {
 
     private ListView listView;
-    private TextView txtCurrentOrder;
 
     OrderDatabase dbOrder;
 
@@ -48,7 +49,7 @@ public class HistoryFragment  extends Fragment {
 
     HistoryListAdapter historyListAdapter;
 
-    private static final int userId = 2;
+    private static final int userId = MainActivity.userId;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
@@ -67,7 +68,5 @@ public class HistoryFragment  extends Fragment {
         listView = view.findViewById(R.id.listView);
         dbOrder = new OrderDatabase(getActivity());
         orders = dbOrder.getAllOrderByUserId(userId);
-
-        txtCurrentOrder = view.findViewById(R.id.txtCurrentOrder);
     }
 }

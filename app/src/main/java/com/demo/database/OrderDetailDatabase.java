@@ -59,31 +59,33 @@ public class OrderDetailDatabase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int orderId = cursor.getInt(6);
+            int oderDetailId = cursor.getInt(0);
             int productId = cursor.getInt(7);
             int percentSaleOff = cursor.getInt(3);
             int quantity = cursor.getInt(4);
             float price = cursor.getFloat(1);
             float total = cursor.getFloat(5);
             float priceAfterSaleOff = cursor.getFloat(2);
-            orderDetails.add(new OrderDetail(price, priceAfterSaleOff, percentSaleOff, quantity, total, orderId, productId));
+            orderDetails.add(new OrderDetail(oderDetailId,price, priceAfterSaleOff, percentSaleOff, quantity, total, orderId, productId));
         }
         return orderDetails;
     }
 
-    public ArrayList<OrderDetail> getAllOrderDetailByOrderId(int  ordId) {
+    public ArrayList<OrderDetail> getAllOrderDetailByOrderId(int ordId) {
         ArrayList<OrderDetail> orderDetails = new ArrayList<>();
         db = getReadableDatabase();
         String sql = "SELECT * FROM OrderDetailFood WHERE orderId = " + ordId + " ";
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()) {
             int orderId = cursor.getInt(6);
+            int oderDetailId = cursor.getInt(0);
             int productId = cursor.getInt(7);
             int percentSaleOff = cursor.getInt(3);
             int quantity = cursor.getInt(4);
             float price = cursor.getFloat(1);
             float total = cursor.getFloat(5);
             float priceAfterSaleOff = cursor.getFloat(2);
-            orderDetails.add(new OrderDetail(price, priceAfterSaleOff, percentSaleOff, quantity, total, orderId, productId));
+            orderDetails.add(new OrderDetail(oderDetailId, price, priceAfterSaleOff, percentSaleOff, quantity, total, orderId, productId));
         }
         return orderDetails;
     }

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.demo.fragment.HistoryFragment;
 import com.demo.fragment.HomeFragment;
 import com.demo.fragment.NotificationFragment;
+import com.demo.fragment.OrderDetailFragment;
 import com.demo.fragment.ProductDetailFragment;
 import com.demo.fragment.SettingFragment;
 import com.demo.fragment.UpdateFragment;
@@ -24,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     static FragmentManager manager;
     private ActionBar toolbar;
+    public static int userId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener() {
         return new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -91,6 +91,26 @@ public class MainActivity extends AppCompatActivity {
         productDetailFragment.setArguments(bundle);
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainframe, productDetailFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public static void openHistoryFragment() {
+        HistoryFragment historyFragment = new HistoryFragment();
+
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainframe, historyFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public static void openDetailOrderFragment(int orderId) {
+        OrderDetailFragment orderDetailFragment = new OrderDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("orderId", orderId);
+        orderDetailFragment.setArguments(bundle);
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainframe, orderDetailFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
