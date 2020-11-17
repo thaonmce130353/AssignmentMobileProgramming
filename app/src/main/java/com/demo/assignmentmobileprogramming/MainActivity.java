@@ -3,9 +3,11 @@ package com.demo.assignmentmobileprogramming;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,6 +20,7 @@ import com.demo.fragment.NotificationFragment;
 import com.demo.fragment.OrderDetailFragment;
 import com.demo.fragment.ProductDetailFragment;
 import com.demo.fragment.SettingFragment;
+import com.demo.fragment.UpdateFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,10 +39,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener());
 
-        manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, new HomeFragment());
-        transaction.commit();
+        Intent intent = getIntent();
+        if (!intent.getBooleanExtra("isExists", false)) {
+            manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, new UpdateFragment());
+            transaction.commit();
+        } else {
+            manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, new HomeFragment());
+            transaction.commit();
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener() {

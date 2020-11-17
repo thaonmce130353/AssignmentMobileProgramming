@@ -24,11 +24,16 @@ public class ProductDatabase extends SQLiteOpenHelper {
 
     public void init() {
         if (getAllProduct().size() == 0) {
-            addNew(new Product(0, "Cosmopolitan", 5.0, "The cosmo became almost ubiquitous in the '90s thanks to the TV show Sex and the City, but this spin on the martini remains just as tasty today as when Carrie Bradshaw made it famous.", 4.5F, 15, true, 5));
-            addNew(new Product(0, "Negroni", 6.0, "A certain Noel Negroni disputes the fact that Count Camillo Negroni created the drink, citing a relative of his, General Pascal Olivier Count de Negroni, as being the man responsible for coming up with the recipe.", 4.5F, 20, true, 5));
-            addNew(new Product(0, "Moscow Mule", 9.0, "Popular for good reason, the Moscow Mule is one of the most refreshing things to sip on a hot summer day. Its suggested vessel, a copper mug, also just looks sharp.", 4.8F, 30, true, 5));
-            addNew(new Product(0, "Whiskey Sour", 8.0, "Perhaps the most refreshing whiskey cocktail, this is an old reliable favorite.", 4.7F, 20, true, 5));
-            addNew(new Product(0, "Manhattan", 8.0, "Created sometime in the mid-1800s, the Manhattan is one of the booziest classic drink recipes.", 4.6F, 15, true, 5));
+            addNew(new Product(0, "Vegetable Beef Soup", 5, "Vegetable Beef Soup is the perfect cozy soup and such a good way to use up all those veggies stocked in the fridge! It’s perfectly hearty and filling thanks to the tender chunks of protein-rich beef and abundance of nutritious vegetables.",
+                    4.5F, 10, true, 3));
+            addNew(new Product(0, "Vegetable Soup", 4.5, "This Vegetable Soup has become one of my most popular soup recipes and for good reason! It’s healthy, it’s comforting and 1,000 times better than what you’ll get in a can! Full of flavor and so easy to make you can’t go wrong with a big warm bowl of vegetable soup.",
+                    3.5F, 15, true, 3));
+            addNew(new Product(0, "Green Goddess Immune Boosting Soup", 5.5, "Green Goddess Immune Boosting Soup ~ this nourishing soup is the cold weather equivalent to your power smoothie.  It’s a vibrant soup packed with everything you need to get through cold and flu season without so much as a sniffle.",
+                    5.0F, 0, true, 3));
+            addNew(new Product(0, "Thai Carrot Sweet Potato Soup", 5.0, "Carrots, sweet potato, and warming Thai curry blended with an unexpected ingredient—almond butter—made it a sweet and spicy, rich soup. I wish it could say it cured me for good (if only soup could), but it definitely made me feel better that evening. And the next morning, when I heated up leftovers for breakfast.",
+                    4.0F, 20, true, 3));
+            addNew(new Product(0, "Parsnip and Apple Soup with Black Lentils and Vegetable Crisps", 7.5, "A delicious, sweet parsnip and apple soup, loaded with lentils and roasted vegetable crisps. It’s no surprise I love me some soup. Recently I’ve made this roasted garlic, leek and tomato soup, and this 5 ingredient pea and mint soup. In these cold season, I just don’t think you can beat a nice warm, comforting soup.",
+                    5.0F, 0, true, 3));
         }
 
     }

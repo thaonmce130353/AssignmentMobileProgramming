@@ -85,28 +85,40 @@ public class ImageDatabase extends SQLiteOpenHelper {
             BitmapDrawable bitmapDrawable = null;
             ByteArrayOutputStream byteArrayOutputStream = null;
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.cosmopolitan);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.vegetable_beef_soup);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 6));
+            addNew(new Image(0, url, true, 1));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.cosmopolitan1);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.vegetable_soup_recipe);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 6));
+            addNew(new Image(0, url, true, 2));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.cosmopolitan2);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.green_goddess_immune_boosting_soup);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 6));
+            addNew(new Image(0, url, true, 3));
 
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.thai_carrot_sweet_potato_soup);
+            bitmap = bitmapDrawable.getBitmap();
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            url = byteArrayOutputStream.toByteArray();
+            addNew(new Image(0, url, true, 4));
 
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.parsnipandapple_soup_with_blacklentilsandvegetable_crisps);
+            bitmap = bitmapDrawable.getBitmap();
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            url = byteArrayOutputStream.toByteArray();
+            addNew(new Image(0, url, true, 5));
         }
 
     }
