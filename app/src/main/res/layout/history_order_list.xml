@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tên food"
-        android:textStyle="bold"
+        android:fontFamily="@font/roboto_bold"
         android:textColor="#000000"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:text="$38,00"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="@color/black"
         android:layout_toRightOf="@id/orderDetailImage"
         android:layout_marginTop="50dp"
@@ -39,12 +40,16 @@
         android:id="@+id/orderStatus"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:textSize="18dp"
+        android:layout_below="@+id/timeOrder"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
         android:text="Chờ xác nhận"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="@color/bgBottomNavigation"
-        android:layout_toRightOf="@id/priceFood"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="100dp"/>
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/timeOrder"
@@ -52,6 +57,7 @@
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:text="8:00 AM"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="#504A4A"
         android:layout_toRightOf="@id/orderDetailImage"
         android:layout_marginLeft="190dp"/>

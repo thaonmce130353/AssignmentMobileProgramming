@@ -22,11 +22,10 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:fontFamily="@font/roboto_bold"
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="15sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFood" />
 
@@ -35,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-
+        android:fontFamily="@font/roboto_medium"
         android:text="$30"
         android:textColor="@color/bgBottomNavigation"
         android:textSize="20sp"
@@ -54,6 +53,7 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:text="Buy"
+        android:fontFamily="@font/roboto_medium"
         android:textColor="#FFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFoodName"

@@ -24,13 +24,11 @@ public class ProductDatabase extends SQLiteOpenHelper {
 
     public void init() {
         if (getAllProduct().size() == 0) {
-            addNew(new Product(0, "Tiger", 0.9, "Tiger is a light beer", 4.5F, 0, true, 5));
-            addNew(new Product(0, "Basic Chicken", 2, "This comfort food classic is just as flavorful and soul-satisfying as Grandma's chicken soup, but where hers took several hours-or a day-to make, ours takes under an hour", 4.5F, 10, true, 3));
-            addNew(new Product(0, "Mixed berry mousse", 1.5, "A mousse is always a great dessert option, thanks to its texture and its simplicity. Especially now that artisanal food and authentic flavors are in vogue ", 4.0F, 10, true, 4));
-            addNew(new Product(0, "Matcha cake", 2, "Matcha is still a leader in the health trend. It is commonly found in traditional Japanese mochi, as a filling, and as a base for cookies ", 4.0F, 0, true, 4));
-            addNew(new Product(0, "City Hot Pot", 9, "With Jpot gone, we find this to be the best local hotpot restaurant in town. Choose from 12 different soup bases like bak kut teh, prawn, kimchi and tom yum", 4.0F, 10, true, 1));
-            addNew(new Product(0, "Heineken", 1, "Heineken beer is sold in a green bottle with a red star", 4.0F, 0, true, 5));
-            addNew(new Product(0, "Egg Roll Skillet from Cooking Classy", 5, "This recipe really does taste like egg roll filling thanks to shredded cabbage and ground turkey", 4.0F, 0, true, 2));
+            addNew(new Product(0, "Cosmopolitan", 5.0, "The cosmo became almost ubiquitous in the '90s thanks to the TV show Sex and the City, but this spin on the martini remains just as tasty today as when Carrie Bradshaw made it famous.", 4.5F, 15, true, 5));
+            addNew(new Product(0, "Negroni", 6.0, "A certain Noel Negroni disputes the fact that Count Camillo Negroni created the drink, citing a relative of his, General Pascal Olivier Count de Negroni, as being the man responsible for coming up with the recipe.", 4.5F, 20, true, 5));
+            addNew(new Product(0, "Moscow Mule", 9.0, "Popular for good reason, the Moscow Mule is one of the most refreshing things to sip on a hot summer day. Its suggested vessel, a copper mug, also just looks sharp.", 4.8F, 30, true, 5));
+            addNew(new Product(0, "Whiskey Sour", 8.0, "Perhaps the most refreshing whiskey cocktail, this is an old reliable favorite.", 4.7F, 20, true, 5));
+            addNew(new Product(0, "Manhattan", 8.0, "Created sometime in the mid-1800s, the Manhattan is one of the booziest classic drink recipes.", 4.6F, 15, true, 5));
         }
 
     }
