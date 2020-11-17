@@ -43,6 +43,11 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     }
 
+   /* public void updateUser(String gmail, boolean gender, String birthday, String phone, String address)
+    {
+        db = getWritableDatabase();
+        String sql = String.format("UPDATE * FROM  %s SET gender = "+" '"+gender+"' birthday = "+" '"+birthday+"' phone = "+" '"+phone+"' address = "+" '"+address+"' "+" WHERE gmail = %s", TABLE_USER, gmail);
+    }*/
     public ArrayList<User> getAllUser() {
         ArrayList<User> users = new ArrayList<>();
         db = getReadableDatabase();

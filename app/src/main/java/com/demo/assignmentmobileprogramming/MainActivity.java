@@ -115,4 +115,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public static void openHomeFragment() {
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainframe, homeFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    public static void openSettingFrament()
+    {
+        SettingFragment settingFragment = new SettingFragment();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainframe, settingFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }
