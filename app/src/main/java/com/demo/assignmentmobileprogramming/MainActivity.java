@@ -37,20 +37,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener());
+        try {
+            BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener());
 
-        Intent intent = getIntent();
-        if (!intent.getBooleanExtra("isExists", false)) {
-            manager = getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.mainframe, new UpdateFragment());
-            transaction.commit();
-        } else {
-            manager = getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.mainframe, new HomeFragment());
-            transaction.commit();
+            Intent intent = getIntent();
+            if (!intent.getBooleanExtra("isExists", true)) {
+                manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.mainframe, new UpdateFragment());
+                transaction.commit();
+            } else {
+                manager = getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.mainframe, new HomeFragment());
+                transaction.commit();
+            }
+        } catch (Exception e){
+
         }
     }
 
@@ -58,84 +62,111 @@ public class MainActivity extends AppCompatActivity {
         return new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction transaction = manager.beginTransaction();
-                Fragment fragment = null;
-                switch (item.getItemId()) {
-                    case R.id.navigation_shop:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.navigation_gifts:
-                        fragment = new HistoryFragment();
-                        break;
-                    case R.id.navigation_cart:
-                        fragment = new NotificationFragment();
-                        break;
-                    case R.id.navigation_profile:
-                        fragment = new SettingFragment();
-                        break;
-                    case R.id.navigation_map:
-                        Uri gmmIntentUri = Uri.parse("geo:10.0120585,105.7310684?z=15");
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        mapIntent.setPackage("com.google.android.apps.maps");
-                        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                            startActivity(mapIntent);
-                        }
-                        break;
-                }
+                try {
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    Fragment fragment = null;
+                    switch (item.getItemId()) {
+                        case R.id.navigation_shop:
+                            fragment = new HomeFragment();
+                            break;
+                        case R.id.navigation_gifts:
+                            fragment = new HistoryFragment();
+                            break;
+                        case R.id.navigation_cart:
+                            fragment = new NotificationFragment();
+                            break;
+                        case R.id.navigation_profile:
+                            fragment = new SettingFragment();
+                            break;
+                        case R.id.navigation_map:
+                            Uri gmmIntentUri = Uri.parse("geo:10.0120585,105.7310684?z=15");
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                            mapIntent.setPackage("com.google.android.apps.maps");
+                            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                                startActivity(mapIntent);
+                            }
+                            break;
+                    }
 
-                transaction.replace(R.id.mainframe, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                    transaction.replace(R.id.mainframe, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } catch (Exception e){
+
+                }
                 return true;
             }
         };
     }
 
     public static void openDetailFragment(int productId) {
-        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("productId", productId);
-        productDetailFragment.setArguments(bundle);
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, productDetailFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        try {
+            ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("productId", productId);
+            productDetailFragment.setArguments(bundle);
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, productDetailFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
     }
 
     public static void openHistoryFragment() {
-        HistoryFragment historyFragment = new HistoryFragment();
+        try {
+            HistoryFragment historyFragment = new HistoryFragment();
 
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, historyFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, historyFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
     }
 
     public static void openDetailOrderFragment(int orderId) {
-        OrderDetailFragment orderDetailFragment = new OrderDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("orderId", orderId);
-        orderDetailFragment.setArguments(bundle);
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, orderDetailFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        try {
+            OrderDetailFragment orderDetailFragment = new OrderDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("orderId", orderId);
+            orderDetailFragment.setArguments(bundle);
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, orderDetailFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
     }
 
     public static void openHomeFragment() {
-        HomeFragment homeFragment = new HomeFragment();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, homeFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        try {
+            HomeFragment homeFragment = new HomeFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, homeFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
     }
     public static void openSettingFrament()
     {
-        SettingFragment settingFragment = new SettingFragment();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainframe, settingFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        try {
+            SettingFragment settingFragment = new SettingFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, settingFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
     }
+
+
+
 
 }

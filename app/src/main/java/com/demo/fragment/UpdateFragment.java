@@ -86,7 +86,9 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
             editName.setText(in.getDisplayName());
             editEmail.setText(in.getEmail());
             editEmail.setEnabled(false);
-            dbUser.addUser(new User(editName.getText().toString(), editEmail.getText().toString()));
+            User u = dbUser.getUserById(MainActivity.userId);
+            if(u == null)
+                dbUser.addUser(new User(editName.getText().toString(), editEmail.getText().toString()));
             /* Picasso.get().load(in.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(image);*/
         } else {
 

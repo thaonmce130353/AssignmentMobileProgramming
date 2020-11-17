@@ -39,6 +39,24 @@ public class ProductDatabase extends SQLiteOpenHelper {
             addNew(new Product(0, "Moscow Mule", 9.0, "Popular for good reason, the Moscow Mule is one of the most refreshing things to sip on a hot summer day. Its suggested vessel, a copper mug, also just looks sharp.", 4.8F, 30, true, 5));
             addNew(new Product(0, "Whiskey Sour", 8.0, "Perhaps the most refreshing whiskey cocktail, this is an old reliable favorite.", 4.7F, 20, true, 5));
             addNew(new Product(0, "Manhattan", 8.0, "Created sometime in the mid-1800s, the Manhattan is one of the booziest classic drink recipes.", 4.6F, 15, true, 5));
+
+            addNew(new Product(0, "_chocolate Cake", 10, "Rich in chocalate flavour with a tender-moist crumb", 4.0F, 7, true, 4));
+
+            addNew(new Product(0, "_cherrypie", 8, " Plus it tastes pretty awesome no matter which flavor is on the menu", 4.0F, 8, true, 4));
+
+            addNew(new Product(0, "_strawberry Cake", 8, " This strawberry cake completely blew me away. After years of mediocre from-scratch strawberry cakes, my expectations were pretty low", 4.5F, 5, true, 4));
+
+            addNew(new Product(0, "_doraemon Cake", 7, " Doraemon has been the most loved animation character for each kid for quite a while now. So think about their reaction when they see their most loved animation character on their birthday cake", 3.5F, 7, true, 4));
+
+            addNew(new Product(0, "_flan", 6, " a dessert of sweetened egg custard with a caramel topping. an open, tartlike pastry, the shell of which is baked in a bottomless band of metal (flan ring ) on a baking sheet", 5.0F, 10, true, 4));
+
+
+
+            addNew(new Product(0," Vegetarian hot pot ", 20, "During family reunions or weekend meals, hot pot is always the first choice of housewives. But if you are fed up with seafood or meat, then vegetarian hot pot is a great suggestion for you. Therefore, Cet.edu.vn will guide you how to cook a spicy vegetarian hot pot and a frugal vegetarian mushroom hotpot!", 4.0F, 22, true, 1));
+            addNew(new Product(0, "Crab hotpot", 10, " Crab hotpot has long been considered a delicious dish in the hot pot of Vietnam and is popular with everyone and cannot be ignored by the characteristic delicious taste of many ingredients mixed together. No matter how it is combined with the ingredients or the variation of how to cook the Hanoi crab hotpot, the dish always has a sweet, fragrant flavor characteristic of crab and popular vegetables. ", 4.0F, 11, true, 1));
+            addNew(new Product(0, " Seafood hot pot", 9, "Seafood hot pot is a favorite dish in cold days. In which, spicy seafood hotpot and mixed seafood hotpot are the two most popular types. However, not everyone knows to have a pot of hot pot broth.", 4.0F, 10, true, 1));
+            addNew(new Product(0, "Mam hotpot", 10,"Mam hotpot is a delicious and attractive dish of the West River region. With a rich flavor from a combination of rustic ingredients such as fish sauce, fish, squid, meat, eggplant, and vegetables, along with how to cook fish sauce hotpot that DTBTAAu shares below promises a family menu There will be more fun.", 4.0F, 11, true, 2));
+            addNew(new Product(0, "Thai Hot pot", 10, " The way to cook Thai hot pot with the sour, spicy taste of the Golden Temple country is extremely simple without seasoning packages. Fully prepared the ingredients of seafood, fish meat, vegetables and follow the instructions that everyone can sit around the hot pot to enjoy and talk. Not only convenient, economical and hygienic, but the Thai hotpot also has a delicious and attractive taste, not less than the restaurant.", 4.0F, 11, true, 2));
         }
 
     }

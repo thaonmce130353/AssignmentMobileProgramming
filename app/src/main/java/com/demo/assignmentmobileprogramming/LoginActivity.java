@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         {
             if (user.getGmail().equals(email))
             {
+                MainActivity.userId = user.getId();
                 return true;
             }
         }

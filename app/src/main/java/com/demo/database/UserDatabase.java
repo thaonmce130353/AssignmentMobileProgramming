@@ -54,7 +54,7 @@ public class UserDatabase extends SQLiteOpenHelper {
         values.put("phone", user.getPhone());
         values.put("address", user.getAddress());
 //        values.put("gmail", u);
-//        values.put("birthday", user.getBirthday());
+        values.put("birthday", user.getBirthday());
 
         db.update(TABLE_USER, values, "gmail = '" + user.getGmail() + "'", null);
 
@@ -85,9 +85,32 @@ public class UserDatabase extends SQLiteOpenHelper {
         return users;
     }
 
+    public User getUserById(int uId) {
+        User u  = null;
+        db = getReadableDatabase();
+        String sql = String.format("SELECT * FROM %s WHERE id = %d", TABLE_USER, uId);
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String username = cursor.getString(1);
+            String password = cursor.getString(2);
+            String fullname = cursor.getString(3);
+            String birthday = cursor.getString(4);
+            boolean gender = cursor.getInt(5) > 0;
+            String gmail = cursor.getString(6);
+            String phone = cursor.getString(7);
+            String address = cursor.getString(8);
+            String datejoin = cursor.getString(9);
+            boolean status = cursor.getInt(10) > 0;
+
+
+            u = new User(uId, username, password, fullname, birthday, gender, gmail, phone, address, datejoin, status);
+        }
+        return u;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(50), password VARCHAR(50), fullname VARCHAR(50), birthday DATETIME, gender INTEGER, gmail VARCHAR(50), phone VACHAR(50), address VARCHAR(50), datejoin VARCHAR, status INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(50), password VARCHAR(50), fullname VARCHAR(50), birthday VARCHAR, gender INTEGER, gmail VARCHAR(50), phone VACHAR(50), address VARCHAR(50), datejoin VARCHAR, status INTEGER)");
 
     }
 

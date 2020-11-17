@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -58,74 +57,90 @@ public class HomeFragment extends Fragment implements ImageClickListener, View.O
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.home_fragment, container, false);
-        dbType = new TypeDatabase(getActivity());
-        dbProduct = new ProductDatabase(getActivity());
-        dbImage = new ImageDatabase(getActivity());
-        types = new ArrayList<>();
-        types.add(new Type(-1, "ALL", true));
-        types.addAll(dbType.getAllType());
-        products = dbProduct.getAllProduct();
-        btnSearch = view.findViewById(R.id.btnSearch);
-        txtSearch = view.findViewById(R.id.txtSearch);
-        frameLayoutSearch = view.findViewById(R.id.frameSearch);
+        try {
+            dbType = new TypeDatabase(getActivity());
+            dbProduct = new ProductDatabase(getActivity());
+            dbImage = new ImageDatabase(getActivity());
+            types = new ArrayList<>();
+            types.add(new Type(-1, "ALL", true));
+            types.addAll(dbType.getAllType());
+            products = dbProduct.getAllProduct();
+            btnSearch = view.findViewById(R.id.btnSearch);
+            txtSearch = view.findViewById(R.id.txtSearch);
+            frameLayoutSearch = view.findViewById(R.id.frameSearch);
 
-        frameLayoutSearch.setTranslationZ(1);
+            frameLayoutSearch.setTranslationZ(1);
 
-        btnSearch.setOnClickListener(this);
+            btnSearch.setOnClickListener(this);
 
-        init(view);
-        carouselView.setImageListener(this);
+            init(view);
+            carouselView.setImageListener(this);
 
-        carouselView.setImageClickListener(this);
+            carouselView.setImageClickListener(this);
 
-        RecyclerView recyclerViewType = view.findViewById(R.id.recycle_view_type);
-        recyclerViewType.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerViewType.setLayoutManager(layoutManager);
+            RecyclerView recyclerViewType = view.findViewById(R.id.recycle_view_type);
+            recyclerViewType.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            recyclerViewType.setLayoutManager(layoutManager);
 
-        typeAdapter = new ButtonListAdapter(types, getActivity().getApplicationContext(), this);
+            typeAdapter = new ButtonListAdapter(types, getActivity().getApplicationContext(), this);
 
-        recyclerViewType.setAdapter(typeAdapter);
+            recyclerViewType.setAdapter(typeAdapter);
 
-        RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product_detail);
-        recyclerViewProduct.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        recyclerViewProduct.setLayoutManager(gridLayoutManager);
+            RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product_detail);
+            recyclerViewProduct.setHasFixedSize(true);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+            recyclerViewProduct.setLayoutManager(gridLayoutManager);
 
-        productAdapter = new ProductListAdapter(products, getActivity().getApplicationContext());
+            productAdapter = new ProductListAdapter(products, getActivity().getApplicationContext());
 
-        recyclerViewProduct.setAdapter(productAdapter);
+            recyclerViewProduct.setAdapter(productAdapter);
+        } catch (Exception e) {
+
+        }
         return view;
 
     }
 
     @Override
     public void onClick(int position) {
-        MainActivity.openDetailFragment(productSaleOff.get(position).getId());
+        try {
+            MainActivity.openDetailFragment(productSaleOff.get(position).getId());
+        } catch (Exception e) {
+
+        }
     }
 
     private void init(View view) {
-        productSaleOff = dbProduct.getAllProductSaleOff();
-        imgsForCarousel = new ArrayList<>();
-        for (Product p : productSaleOff) {
-            ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
-            if (images.size() != 0)
-                imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length));
+        try {
+            productSaleOff = dbProduct.getAllProductSaleOff();
+            imgsForCarousel = new ArrayList<>();
+            for (Product p : productSaleOff) {
+                ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
+                if (images.size() != 0)
+                    imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length));
+            }
+            carouselView = view.findViewById(R.id.carouselView);
+            if (imgsForCarousel.size() > 5)
+                carouselView.setPageCount(5);
+            else
+                carouselView.setPageCount(imgsForCarousel.size());
+        } catch (Exception e) {
+
         }
-        carouselView = view.findViewById(R.id.carouselView);
-        if (imgsForCarousel.size() > 5)
-            carouselView.setPageCount(5);
-        else
-            carouselView.setPageCount(imgsForCarousel.size());
     }
 
     public void updateListProduct(int tId) {
-        products.clear();
-        if (tId == -1)
-            products.addAll(dbProduct.getAllProduct());
-        else
-            products.addAll(dbProduct.getProductByType(tId));
-        productAdapter.notifyDataSetChanged();
+        try {
+            products.clear();
+            if (tId == -1)
+                products.addAll(dbProduct.getAllProduct());
+            else
+                products.addAll(dbProduct.getProductByType(tId));
+            productAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+
+        }
     }
 
     /**
@@ -135,25 +150,33 @@ public class HomeFragment extends Fragment implements ImageClickListener, View.O
      */
     @Override
     public void onClick(View v) {
-        products.clear();
-        String searchStr = txtSearch.getText().toString();
-        products.addAll(dbProduct.getProductByName(searchStr));
-        for (Type type : types) {
-            String[] typeName = type.getName().split("\\s+");
-            for (String s : typeName) {
-                if (s.toLowerCase().equals(searchStr.toLowerCase())) {
-                    products.addAll(dbProduct.getProductByType(type.getId()));
-                    break;
+        try {
+            products.clear();
+            String searchStr = txtSearch.getText().toString();
+            products.addAll(dbProduct.getProductByName(searchStr));
+            for (Type type : types) {
+                String[] typeName = type.getName().split("\\s+");
+                for (String s : typeName) {
+                    if (s.toLowerCase().equals(searchStr.toLowerCase())) {
+                        products.addAll(dbProduct.getProductByType(type.getId()));
+                        break;
+                    }
                 }
             }
+            productAdapter.notifyDataSetChanged();
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        } catch (Exception e) {
+
         }
-        productAdapter.notifyDataSetChanged();
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     @Override
     public void setImageForPosition(int position, ImageView imageView) {
-        imageView.setImageBitmap(imgsForCarousel.get(position));
+        try {
+            imageView.setImageBitmap(imgsForCarousel.get(position));
+        } catch (Exception e) {
+
+        }
     }
 }

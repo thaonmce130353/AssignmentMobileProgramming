@@ -17,8 +17,8 @@ import android.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.demo.assignmentmobileprogramming.LoginActivity;
 import com.demo.assignmentmobileprogramming.MainActivity;
@@ -31,29 +31,32 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
-
+public class SettingFragment extends Fragment {
+//    private static GoogleApiClient googleApiClient;
+//    private GoogleSignInOptions gso;
     private Button btnEdit;
     private ImageView image;
     private TextView txtLogout, txtAbout;
+    private RadioButton raMale, raFemale;
     private EditText editName, editBirthday, editAddress, editEmail, editPhone;
     private List<User> list = new ArrayList();
-    UserDatabase Userdb;
-
+    UserDatabase dbUser;
+    User user;
+    boolean isEdit = false;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.setting_fragment, container, false);
-
+//        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+//        googleApiClient = new GoogleApiClient.Builder(getContext()).enableAutoManage((FragmentActivity) getActivity(), (GoogleApiClient.OnConnectionFailedListener) this).
+//                addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
         editName = view.findViewById(R.id.editName);
         editAddress = view.findViewById(R.id.editAddress);
         editBirthday = view.findViewById(R.id.editBirthday);
@@ -61,29 +64,84 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
         editEmail = view.findViewById(R.id.editEmail);
         txtLogout = view.findViewById(R.id.txtLogout);
         txtAbout = view.findViewById(R.id.txtAbout);
-        Userdb = new UserDatabase(getActivity());
+        btnEdit = view.findViewById(R.id.btnSave);
+        raFemale = view.findViewById(R.id.raFemale);
+        raMale = view.findViewById(R.id.raMale);
+
+        dbUser = new UserDatabase(getActivity());
+        inactive();
+
+        try {
+
+            user = dbUser.getUserById(MainActivity.userId);
+
+            editName.setText(String.valueOf(user.getFullname()));
+            editAddress.setText(String.valueOf(user.getAddress()));
+            editBirthday.setText(String.valueOf(user.getBirthday()));
+            editPhone.setText(String.valueOf(user.getPhone()));
+            editEmail.setText(String.valueOf(user.getGmail()));
+
+            raMale.setChecked(user.isGender());
+        } catch (Exception e){
+
+        }
 
         txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                UpdateFragment.logout();
+                try {
+                    UpdateFragment.logout();
+                } catch (Exception e) {
+//                    MainActivity.openHomeFragment();
+                }
                 gotoLogin();
+            }
+        });
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isEdit){
+                    try {
+                        inactive();
+                        isEdit = !isEdit;
+                        btnEdit.setText("Edit");
+                        dbUser.updateUser(new User(1, "", "", editName.getText().toString(), editBirthday.getText().toString(),
+                                raMale.isChecked(), editEmail.getText().toString(), editPhone.getText().toString(), editAddress.getText().toString(), "", true));
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    active();
+                    isEdit = !isEdit;
+                    btnEdit.setText("Save");
+                }
             }
         });
         return view;
 
     }
 
-    public boolean isExist(String email) {
-        list = new ArrayList<>();
-        list = Userdb.getAllUser();
-        for (User user : list) {
-            if (user.getGmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+    private void inactive() {
+        editName.setEnabled(false);
+        editAddress.setEnabled(false);
+        editBirthday.setEnabled(false);
+        editPhone.setEnabled(false);
+        editEmail.setEnabled(false);
+        raMale.setEnabled(false);
+        raFemale.setEnabled(false);
+
+    }
+
+    private void active() {
+        editName.setEnabled(true);
+        editAddress.setEnabled(true);
+        editBirthday.setEnabled(true);
+        editPhone.setEnabled(true);
+//        editEmail.setEnabled(true);
+        raMale.setEnabled(true);
+        raFemale.setEnabled(true);
+
     }
 
     private void handlerSigninResult(GoogleSignInResult result) {
@@ -94,15 +152,25 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
         }
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//    }
 
     private void gotoLogin() {
         startActivity(new Intent(getActivity(), LoginActivity.class));
         getActivity().finish();
     }
 
-
+//    public static void logout() {
+//        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+//            @Override
+//            public void onResult(@NonNull Status status) {
+//                if (status.isSuccess()) {
+//                    MainActivity.openHomeFragment();
+//                } else {
+//                }
+//            }
+//        });
+//    }
 }
