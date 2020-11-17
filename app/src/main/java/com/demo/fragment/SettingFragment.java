@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.assignmentmobileprogramming.LoginActivity;
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.UserDatabase;
 import com.demo.object.info.User;
@@ -45,8 +46,6 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
     private TextView Email;
     private List<User> list = new ArrayList();
     UserDatabase Userdb;
-    private GoogleApiClient googleApiClient;
-    private GoogleSignInOptions gso;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -56,27 +55,22 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
 
         nameV = v.findViewById(R.id.txtNameV2);
         Email = v.findViewById(R.id.txtEmailV2);
+        /*birthday = v.findViewById(R.id.txtBirthV2);
+        phone = v.findViewById(R.id.txtBirthV3);*/
         /*image = v.findViewById(R.id.imageView);*/
         btnSignOut = v.findViewById(R.id.btnLogout);
         Userdb = new UserDatabase(getActivity());
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleApiClient = new GoogleApiClient.Builder(getContext()).enableAutoManage((FragmentActivity) getActivity(), this).
-                addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        if (status.isSuccess())
-                            gotoLogin();
-                        else
-                            Toast.makeText(getActivity(), "Log out failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+                UpdateFragment.logout();
+                gotoLogin();
             }
         });
         return v;
+
     }
 
     public boolean isExist(String email) {
@@ -93,17 +87,10 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
     private void handlerSigninResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount in = result.getSignInAccount();
-            if (!isExist(in.getEmail())) {/*
-                Fragment fragment = new tasks();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
-
-            }
             nameV.setText(in.getDisplayName());
             Email.setText(in.getEmail());
+            /*birthday.setText(Userdb.);*/
+
             /* Picasso.get().load(in.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(image);*/
         } else {
             gotoLogin();
@@ -120,21 +107,5 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
         getActivity().finish();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if (opr.isDone()) {
-            GoogleSignInResult result = opr.get();
-            handlerSigninResult(result);
-        } else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handlerSigninResult(googleSignInResult);
-                }
-            });
-        }
-    }
 }

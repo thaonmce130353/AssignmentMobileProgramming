@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentActivity;
 
+import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.UserDatabase;
 import com.demo.object.info.User;
@@ -26,9 +28,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener{
-    private GoogleApiClient googleApiClient;
+    private static GoogleApiClient googleApiClient;
     private GoogleSignInOptions gso;
     private EditText editName, editBirthday, editAddress, editEmail, editPhone;
     private RadioButton raMale, raFemale;
@@ -50,6 +53,7 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
         btnSave = view.findViewById(R.id.btnSave);
         dbUser = new UserDatabase(getActivity());
         raMale = view.findViewById(R.id.raMale);
+        
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +61,9 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
 //                String birthday, boolean gender, String gmail, String phone, String address, String dateJoin, boolean status
                 dbUser.addUser(new User(1, "", "", editName.getText().toString(), editBirthday.getText().toString(),
                         raMale.isChecked(), editEmail.getText().toString(), editPhone.getText().toString(), editAddress.getText().toString(), "", true));
+                MainActivity.userId = dbUser.getAllUser().get(dbUser.getAllUser().size() - 1).getId();
+                MainActivity.openHomeFragment();
+
             }
         });
 
@@ -94,6 +101,21 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
         }
     }
 
+    public static void logout() {
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if (status.isSuccess()) {
+
+                    MainActivity.openHomeFragment();
+                }
+                else {
+
+
+                }
+            }
+        });
+    }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

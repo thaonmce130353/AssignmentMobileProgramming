@@ -5,70 +5,71 @@
     android:id="@+id/btnUpdate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#769893">
+    android:background="@color/white">
 
-    <TextView
+    <EditText
         android:id="@+id/txtAddressV2"
+
         android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailV2" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtEmailV2"
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBirthV3" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtBirthV3"
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtBirthV2" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtBirthV2"
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGenderV2" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtGenderV2"
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNameV2" />
 
-    <TextView
+    <EditText
         android:id="@+id/txtNameV2"
         android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="180dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="180dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -160,7 +161,7 @@
         android:layout_marginTop="76dp"
         android:gravity="center"
         android:text="Profile"
-        android:textColor="#fff"
+        android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -168,23 +169,37 @@
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="196dp"
-        android:layout_marginLeft="196dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginLeft="164dp"
+        android:layout_marginTop="44dp"
         android:text="Logout"
+        android:background="@drawable/background_button_solid"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAddressV2" />
 
     <Button
         android:id="@+id/btnEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="44dp"
         android:text="Update"
+        android:background="@drawable/background_button_solid"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAddressV2" />
+
+    <Button
+        android:id="@+id/btnAbout"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginLeft="172dp"
+        android:layout_marginTop="44dp"
+        android:text="About App"
+        android:background="@drawable/background_button_solid"
+        app:layout_constraintStart_toEndOf="@+id/btnEdit"
         app:layout_constraintTop_toBottomOf="@+id/txtAddressV2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
