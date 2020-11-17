@@ -24,13 +24,16 @@ public class ProductDatabase extends SQLiteOpenHelper {
 
     public void init() {
         if (getAllProduct().size() == 0) {
-            addNew(new Product(0, "Tiger", 0.9, "Tiger is a light beer", 4.5F, 0, true, 5));
-            addNew(new Product(0, "Basic Chicken", 2, "This comfort food classic is just as flavorful and soul-satisfying as Grandma's chicken soup, but where hers took several hours-or a day-to make, ours takes under an hour", 4.5F, 10, true, 3));
-            addNew(new Product(0, "Mixed berry mousse", 1.5, "A mousse is always a great dessert option, thanks to its texture and its simplicity. Especially now that artisanal food and authentic flavors are in vogue ", 4.0F, 10, true, 4));
-            addNew(new Product(0, "Matcha cake", 2, "Matcha is still a leader in the health trend. It is commonly found in traditional Japanese mochi, as a filling, and as a base for cookies ", 4.0F, 0, true, 4));
-            addNew(new Product(0, "City Hot Pot", 9, "With Jpot gone, we find this to be the best local hotpot restaurant in town. Choose from 12 different soup bases like bak kut teh, prawn, kimchi and tom yum", 4.0F, 10, true, 1));
-            addNew(new Product(0, "Heineken", 1, "Heineken beer is sold in a green bottle with a red star", 4.0F, 0, true, 5));
-            addNew(new Product(0, "Egg Roll Skillet from Cooking Classy", 5, "This recipe really does taste like egg roll filling thanks to shredded cabbage and ground turkey", 4.0F, 0, true, 2));
+            addNew(new Product(0, "Vegetable Beef Soup", 5, "Vegetable Beef Soup is the perfect cozy soup and such a good way to use up all those veggies stocked in the fridge! It’s perfectly hearty and filling thanks to the tender chunks of protein-rich beef and abundance of nutritious vegetables.",
+                    4.5F, 10, true, 3));
+            addNew(new Product(0, "Vegetable Soup", 4.5, "This Vegetable Soup has become one of my most popular soup recipes and for good reason! It’s healthy, it’s comforting and 1,000 times better than what you’ll get in a can! Full of flavor and so easy to make you can’t go wrong with a big warm bowl of vegetable soup.",
+                    3.5F, 15, true, 3));
+            addNew(new Product(0, "Green Goddess Immune Boosting Soup", 5.5, "Green Goddess Immune Boosting Soup ~ this nourishing soup is the cold weather equivalent to your power smoothie.  It’s a vibrant soup packed with everything you need to get through cold and flu season without so much as a sniffle.",
+                    5.0F, 0, true, 3));
+            addNew(new Product(0, "Thai Carrot Sweet Potato Soup", 5.0, "Carrots, sweet potato, and warming Thai curry blended with an unexpected ingredient—almond butter—made it a sweet and spicy, rich soup. I wish it could say it cured me for good (if only soup could), but it definitely made me feel better that evening. And the next morning, when I heated up leftovers for breakfast.",
+                    4.0F, 20, true, 3));
+            addNew(new Product(0, "Parsnip and Apple Soup with Black Lentils and Vegetable Crisps", 7.5, "A delicious, sweet parsnip and apple soup, loaded with lentils and roasted vegetable crisps. It’s no surprise I love me some soup. Recently I’ve made this roasted garlic, leek and tomato soup, and this 5 ingredient pea and mint soup. In these cold season, I just don’t think you can beat a nice warm, comforting soup.",
+                    5.0F, 0, true, 3));
         }
 
     }

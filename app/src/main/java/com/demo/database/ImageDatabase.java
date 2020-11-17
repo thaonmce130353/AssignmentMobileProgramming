@@ -85,54 +85,40 @@ public class ImageDatabase extends SQLiteOpenHelper {
             BitmapDrawable bitmapDrawable = null;
             ByteArrayOutputStream byteArrayOutputStream = null;
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.tiger);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.vegetable_beef_soup);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
             addNew(new Image(0, url, true, 1));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.basic_soup);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.vegetable_soup_recipe);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
             addNew(new Image(0, url, true, 2));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.mixed_berry_mousse);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.green_goddess_immune_boosting_soup);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
             addNew(new Image(0, url, true, 3));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.matcha_cake);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.thai_carrot_sweet_potato_soup);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
             addNew(new Image(0, url, true, 4));
 
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.hotpot_city);
+            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.parsnipandapple_soup_with_blacklentilsandvegetable_crisps);
             bitmap = bitmapDrawable.getBitmap();
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
             addNew(new Image(0, url, true, 5));
-
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.heineken);
-            bitmap = bitmapDrawable.getBitmap();
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-            url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 6));
-
-            bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.egg_roll_skillet_from_cooking_classy);
-            bitmap = bitmapDrawable.getBitmap();
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-            url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 7));
         }
 
     }
