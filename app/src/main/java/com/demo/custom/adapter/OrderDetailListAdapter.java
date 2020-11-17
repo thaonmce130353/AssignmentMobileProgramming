@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.ImageDatabase;
+import com.demo.database.OrderDatabase;
 import com.demo.database.ProductDatabase;
 import com.demo.object.info.Image;
 import com.demo.object.info.Order;
@@ -77,7 +78,7 @@ public class OrderDetailListAdapter extends BaseAdapter {
         } else
             imgFood.setImageResource(R.drawable.dessert);
         txtName.setText(product.getName());
-        txtPrice.setText("$" + orderDetail.getTotal());
+        txtPrice.setText(String.format("%1$,.2f$", orderDetail.getTotal()));
         txtQuantity.setText(String.valueOf(orderDetail.getQuantity()));
 
         return convertView;

@@ -98,14 +98,49 @@
             android:textStyle="bold" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/listItemOrder"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="150dp"
         android:layout_below="@id/header">
         <ListView
             android:id="@+id/orderDetailListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/bgBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/listItemOrder"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-150dp"
+        android:layout_marginBottom="80dp"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total cost: "
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"/>
+        <TextView
+            android:id="@+id/totalCost"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="$38.0"
+            android:textSize="24dp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/txtTotal"
+            android:layout_marginLeft="80dp"/>
     </RelativeLayout>
 
 </RelativeLayout>

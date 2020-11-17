@@ -6,126 +6,139 @@
     android:layout_height="match_parent"
     android:background="#FFF">
 
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselProductDetail"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:fillColor="#FFFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp"
-        android:background="@color/colorPrimary"/>
-    <View
-        android:layout_width="0dp"
-
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselProductDetail"/>
-
-    <TextView
-        android:id="@+id/txtFoodName"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselProductDetail"
-        android:gravity="start" />
-
-    <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:text="TextView"
-        android:textSize="25sp"
-        android:textColor="#F00"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
-
-    <TextView
-        android:id="@+id/txtDescription"
-        android:layout_width="347dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="2dp"
-        android:textSize="20sp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:background="#DDD"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTheSameProduct">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle_view_product_detail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="65dp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
+            <com.synnapps.carouselview.CarouselView
+                android:id="@+id/carouselProductDetail"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/colorPrimary"
+                app:fillColor="#FFFFFFFF"
+                app:pageColor="#00000000"
+                app:radius="6dp"
+                app:slideInterval="3000"
+                app:strokeColor="#FF777777"
+                app:strokeWidth="1dp" />
 
-    <TextView
-        android:id="@+id/txtTheSameProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"
-        android:text="Relative product"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
-    <View
-        android:layout_width="0dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintTop_toBottomOf="@+id/carouselProductDetail" />
 
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTheSameProduct" />
+            <TextView
+                android:id="@+id/txtFoodName"
+                android:layout_width="320dp"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:text="TextView"
+                android:gravity="start" />
+            <TextView
+                android:id="@+id/txtPriceSaleOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:text="Price Sale"
+                android:fontFamily="@font/roboto_thin"
+                android:background="@drawable/strike_through"
+                android:gravity="right"
+                android:textSize="18sp"
+                android:layout_gravity="right"
+                android:textColor="#F00"/>
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="right"
+                android:text="TextView"
+                android:layout_gravity="right"
+                android:textSize="20sp"
+                android:textColor="#F00"/>
 
-    <Button
-        android:id="@+id/btnBuyDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
-        android:textColor="@color/white"
-        android:background="@drawable/background_button_solid"
-        android:text="buy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="2dp"
+                android:textSize="16sp"
+                android:text="TextView"
+                 />
 
+            <Button
+                android:id="@+id/btnBuyDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="52dp"
+                android:layout_marginRight="52dp"
+                android:layout_gravity="right"
+                android:background="@drawable/background_button_solid"
+                android:text="buy"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/darker_gray"
+                 />
+
+            <TextView
+                android:id="@+id/txtTheSameProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Relative product"
+                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#DDD"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_view_product_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="65dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

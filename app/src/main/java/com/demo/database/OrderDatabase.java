@@ -33,6 +33,7 @@ public class OrderDatabase extends SQLiteOpenHelper {
         values.put("tableId", order.getTableId());
         values.put("userId", order.getUserId());
         values.put("orderDay", order.getOrderDay());
+        values.put("status", order.getStatus());
         db.insert(TABLE_TYPE, null, values);
     }
 
@@ -47,9 +48,27 @@ public class OrderDatabase extends SQLiteOpenHelper {
             int userId = cursor.getInt(3);
             float totalMoney = cursor.getFloat(1);
             String orderDay = cursor.getString(4);
-            orders.add(new Order(id, totalMoney, orderDay, tableId, userId));
+            int status = cursor.getInt(5);
+            orders.add(new Order(id, totalMoney, orderDay, tableId, userId, status));
         }
         return orders;
+    }
+    public Order getOrderById(int orderId){
+        db = getReadableDatabase();
+        Cursor cursor = null;
+        try{
+            cursor = db.query("OrderFood", null, "orderId = ?", new String[] {String.valueOf(orderId)}, null, null, null);
+            cursor.moveToFirst();
+            int id = cursor.getInt(0);
+            int tableId = cursor.getInt(4);
+            int userId = cursor.getInt(3);
+            float totalMoney = cursor.getFloat(1);
+            String orderDay = cursor.getString(2);
+            int status = cursor.getInt(5);
+            return new Order(id, totalMoney, orderDay, tableId, userId, status);
+        } finally {
+            cursor.close();
+        }
     }
 
     public ArrayList<Order> getAllOrderByUserId(int uId) {
@@ -63,18 +82,19 @@ public class OrderDatabase extends SQLiteOpenHelper {
             int userId = cursor.getInt(3);
             float totalMoney = cursor.getFloat(1);
             String orderDay = cursor.getString(2);
-            orders.add(new Order(id, totalMoney, orderDay, tableId, userId));
+            int status = cursor.getInt(5);
+            orders.add(new Order(id, totalMoney, orderDay, tableId, userId, status));
         }
         return orders;
     }
 
     private void init() {
         if (getAllOrder().size() == 0) {
-            addNewOrder(new Order(1, 50, "10-02-2020 08:25:36", 1, 1));
-            addNewOrder(new Order(2, 40, "10-02-2020 09:34:37", 2, 2));
-            addNewOrder(new Order(3, 30, "09-02-2020 12:27:37", 3, 2));
-            addNewOrder(new Order(4, 20, "09-02-2020 09:27:37", 4, 3));
-            addNewOrder(new Order(5, 10, "08-02-2020 04:27:37", 5, 3));
+//            addNewOrder(new Order(1, 50, "10-02-2020 08:25:36", 1, 1,1));
+//            addNewOrder(new Order(2, 40, "10-02-2020 09:34:37", 2, 2,0));
+//            addNewOrder(new Order(3, 30, "09-02-2020 12:27:37", 3, 2, 2));
+//            addNewOrder(new Order(4, 20, "09-02-2020 09:27:37", 4, 3, 2));
+//            addNewOrder(new Order(5, 10, "08-02-2020 04:27:37", 5, 3, 2));
         }
     }
 
@@ -82,7 +102,7 @@ public class OrderDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_TYPE +
                 "(orderId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "totalMoney FLOAT, orderDay DATE, tableId INTEGER, userId INTEGER)");
+                "totalMoney FLOAT, orderDay DATE, tableId INTEGER, userId INTEGER, status INTEGER)");
     }
 
     @Override

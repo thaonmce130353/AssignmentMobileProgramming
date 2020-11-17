@@ -8,20 +8,31 @@ public class Order {
     private String orderDay;
     private int tableId;
     private int userId;
+    private int status;
 
-    public Order(int orderId, float totalMoney, String orderDay, int tableId, int userId) {
+    public Order(int orderId, float totalMoney, String orderDay, int tableId, int userId, int status) {
         this.orderId = orderId;
         this.totalMoney = totalMoney;
         this.orderDay = orderDay;
         this.tableId = tableId;
         this.userId = userId;
+        this.status = status;
     }
 
-    public Order(float totalMoney, String orderDay, int tableId, int userId) {
+    public Order(float totalMoney, String orderDay, int tableId, int userId, int status) {
         this.totalMoney = totalMoney;
         this.orderDay = orderDay;
         this.tableId = tableId;
         this.userId = userId;
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getOrderId() {

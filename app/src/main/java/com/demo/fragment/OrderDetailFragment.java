@@ -21,9 +21,10 @@ import java.util.ArrayList;
 public class OrderDetailFragment extends Fragment {
 
     OrderDetailDatabase orderDetailDatabase;
+    OrderDatabase orderDatabase;
     ArrayList<OrderDetail> orderDetail;
     ListView listView;
-    TextView txtCode;
+    TextView txtCode, txtCost;
     OrderDetailListAdapter orderDetailListAdapter;
 
     @Override
@@ -43,11 +44,16 @@ public class OrderDetailFragment extends Fragment {
 
         listView = view.findViewById(R.id.orderDetailListView);
         txtCode = (TextView) view.findViewById(R.id.orderCode);
+        txtCost = (TextView) view.findViewById(R.id.totalCost);
 
         orderDetailDatabase = new OrderDetailDatabase(getActivity());
+        orderDatabase = new OrderDatabase(getActivity());
 
         Bundle bundle = getArguments();
         orderDetail = orderDetailDatabase.getAllOrderDetailByOrderId(bundle.getInt("orderId"));
         txtCode.setText("Code: " + bundle.getInt("orderId"));
+
+        float totalCost = orderDatabase.getOrderById(bundle.getInt("orderId")).getTotalMoney();
+        txtCost.setText(String.format("%1$,.2f$", totalCost));
     }
 }
