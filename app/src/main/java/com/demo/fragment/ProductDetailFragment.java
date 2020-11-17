@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class ProductDetailFragment extends Fragment implements ImageListener {
-    private TextView txtNameFood, txtPrice, txtDescription;
+    private TextView txtNameFood, txtPrice, txtDescription, txtPriceSaleOff;
     private Button btnBuyDetail;
     ImageDatabase dbImage;
     ProductDatabase dbProduct;
@@ -84,6 +83,7 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
 
     private void init(View view, Product p) {
         txtDescription = view.findViewById(R.id.txtDescription);
+        txtPriceSaleOff = view.findViewById(R.id.txtPriceSaleOff);
         txtPrice = view.findViewById(R.id.txtPrice);
         txtNameFood = view.findViewById(R.id.txtFoodName);
         btnBuyDetail = view.findViewById(R.id.btnBuyDetail);
@@ -91,6 +91,14 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
         txtDescription.setText(p.getDescription());
         txtPrice.setText(String.format("%1$,.2f$", p.getPrice()));
         txtNameFood.setText(p.getName());
+
+        if (p.getPercentSaleOff() != 0) {
+
+            float priceAfterSale = (float) p.getPrice() * ((100 - p.getPercentSaleOff()) / (float)100);
+            txtPriceSaleOff.setText(String.format("%1$,.2f$", priceAfterSale));
+        } else {
+            ((ViewGroup) txtPriceSaleOff.getParent()).removeView(txtPriceSaleOff);
+        }
         imgsForCarousel = new ArrayList<>();
 
         ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
@@ -156,11 +164,11 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
                 } else {
                     float priceAfterSaleOff = (float) (p.getPrice() * (100 - p.getPercentSaleOff()) / 100F);
 
-                    dbOrder.addNewOrder(new Order((float)(priceAfterSaleOff * quantity), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId, 0));
+                    dbOrder.addNewOrder(new Order((float) (priceAfterSaleOff * quantity), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId, 0));
                     ArrayList<Order> orders = dbOrder.getAllOrder();
                     int idOrder = orders.get(orders.size() - 1).getOrderId();
 
-                    dbOrderDetail.addNewOrderDetail(new OrderDetail((float) p.getPrice(), priceAfterSaleOff, p.getPercentSaleOff(), quantity, (float)(priceAfterSaleOff * quantity), idOrder, p.getId()));
+                    dbOrderDetail.addNewOrderDetail(new OrderDetail((float) p.getPrice(), priceAfterSaleOff, p.getPercentSaleOff(), quantity, (float) (priceAfterSaleOff * quantity), idOrder, p.getId()));
 
                     MainActivity.openHistoryFragment();
                     dialog.dismiss();
