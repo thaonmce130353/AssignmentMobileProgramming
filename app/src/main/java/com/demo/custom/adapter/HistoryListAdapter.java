@@ -60,12 +60,20 @@ public class HistoryListAdapter extends BaseAdapter {
         TextView txtName = (TextView) convertView.findViewById(R.id.nameFood);
         TextView txtPrice = (TextView) convertView.findViewById(R.id.priceFood);
         TextView txtTime = (TextView) convertView.findViewById(R.id.timeOrder);
+        TextView txtStatus = (TextView) convertView.findViewById(R.id.orderStatus);
 
         //gan gia tri
         Order order = orders.get(position);
         txtName.setText("Order code: " + order.getOrderId());
         txtPrice.setText("$" + order.getTotalMoney());
         txtTime.setText(order.getOrderDay());
+
+        switch (order.getStatus()){
+            case 0: txtStatus.setText("Chờ xác nhận"); break;
+            case 1: txtStatus.setText("Đã xác nhận"); break;
+            case 2: txtStatus.setText("Đã thanh toán"); break;
+            default: txtStatus.setText("Wrong data!"); break;
+        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

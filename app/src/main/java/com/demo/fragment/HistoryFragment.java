@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -57,7 +58,7 @@ public class HistoryFragment  extends Fragment {
         View view = inflater.inflate(R.layout.history_fragment, container, false);
 
         init(view);
-
+        Collections.reverse(orders);
         historyListAdapter = new HistoryListAdapter(getActivity(), R.layout.history_order_list, orders);
         listView.setAdapter(historyListAdapter);
 

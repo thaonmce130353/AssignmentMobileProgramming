@@ -77,7 +77,7 @@ public class OrderDetailListAdapter extends BaseAdapter {
         } else
             imgFood.setImageResource(R.drawable.dessert);
         txtName.setText(product.getName());
-        txtPrice.setText("$" + orderDetail.getTotal());
+        txtPrice.setText(String.format("%1$,.2f$", orderDetail.getTotal()));
         txtQuantity.setText(String.valueOf(orderDetail.getQuantity()));
 
         return convertView;

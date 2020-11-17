@@ -114,7 +114,6 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
         final TextView txtQuantity = alertLayout.findViewById(R.id.txtQuantity);
         ImageView imgMinus = alertLayout.findViewById(R.id.imgMinus);
         ImageView imgAdd = alertLayout.findViewById(R.id.imgAdd);
-        Button btnBuyComfirm = alertLayout.findViewById(R.id.btnBuyComfirm);
 
         final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
@@ -139,18 +138,10 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
             }
         });
 
-        btnBuyComfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(getBaseContext(), "Cancel clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -162,23 +153,18 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
                 if (txtQuantity.getText().toString().equals("0")) {
                     Toast.makeText(getActivity(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
                 } else {
-//                    float totalMoney, String orderDay, int tableId, int userId
 
-
-                    dbOrder.addNewOrder(new Order((float) (quantity * p.getPrice()), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId));
+                    dbOrder.addNewOrder(new Order((float) (quantity * p.getPrice()), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId, 0));
                     ArrayList<Order> orders = dbOrder.getAllOrder();
                     int idOrder = orders.get(orders.size() - 1).getOrderId();
-                    //float price, float priceAfterSaleOff, int percentSaleOff, int quantity, float total, int orderId, int productId
                     float priceAfterSaleOff = (float) (p.getPrice() * (100 - p.getPercentSaleOff()) / 100F);
                     dbOrderDetail.addNewOrderDetail(new OrderDetail((float) p.getPrice(), priceAfterSaleOff, p.getPercentSaleOff(), quantity, priceAfterSaleOff * quantity, idOrder, p.getId()));
-
 
                     MainActivity.openHistoryFragment();
                     dialog.dismiss();
                 }
             }
         });
-
         AlertDialog dialog = alert.create();
         dialog.show();
     }
