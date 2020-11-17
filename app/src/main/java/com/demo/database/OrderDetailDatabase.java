@@ -27,12 +27,12 @@ public class OrderDetailDatabase extends SQLiteOpenHelper {
 
     private void init() {
         if (getAllOrderDetail().size() == 0) {
-            addNewOrderDetail(new OrderDetail(5,5,0,4,20,1,1));
-            addNewOrderDetail(new OrderDetail(10,10,0,3,30,1,2));
-            addNewOrderDetail(new OrderDetail(8,8,0,5,40,2,3));
-            addNewOrderDetail(new OrderDetail(10,10,0,3,30,3,2));
-            addNewOrderDetail(new OrderDetail(5,5,0,4,20,4,1));
-            addNewOrderDetail(new OrderDetail(10,10,0,1,10,5,2));
+//            addNewOrderDetail(new OrderDetail(5,5,0,4,20,1,1));
+//            addNewOrderDetail(new OrderDetail(10,10,0,3,30,1,2));
+//            addNewOrderDetail(new OrderDetail(8,8,0,5,40,2,3));
+//            addNewOrderDetail(new OrderDetail(10,10,0,3,30,3,2));
+//            addNewOrderDetail(new OrderDetail(5,5,0,4,20,4,1));
+//            addNewOrderDetail(new OrderDetail(10,10,0,1,10,5,2));
         }
     }
 

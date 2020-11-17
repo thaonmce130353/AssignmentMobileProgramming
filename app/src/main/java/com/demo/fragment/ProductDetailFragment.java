@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,12 +154,13 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
                 if (txtQuantity.getText().toString().equals("0")) {
                     Toast.makeText(getActivity(), "Quantity must be greater than 0!", Toast.LENGTH_SHORT).show();
                 } else {
+                    float priceAfterSaleOff = (float) (p.getPrice() * (100 - p.getPercentSaleOff()) / 100F);
 
-                    dbOrder.addNewOrder(new Order((float) (quantity * p.getPrice()), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId, 0));
+                    dbOrder.addNewOrder(new Order((float)(priceAfterSaleOff * quantity), format.format(Calendar.getInstance().getTime()), 1, MainActivity.userId, 0));
                     ArrayList<Order> orders = dbOrder.getAllOrder();
                     int idOrder = orders.get(orders.size() - 1).getOrderId();
-                    float priceAfterSaleOff = (float) (p.getPrice() * (100 - p.getPercentSaleOff()) / 100F);
-                    dbOrderDetail.addNewOrderDetail(new OrderDetail((float) p.getPrice(), priceAfterSaleOff, p.getPercentSaleOff(), quantity, priceAfterSaleOff * quantity, idOrder, p.getId()));
+
+                    dbOrderDetail.addNewOrderDetail(new OrderDetail((float) p.getPrice(), priceAfterSaleOff, p.getPercentSaleOff(), quantity, (float)(priceAfterSaleOff * quantity), idOrder, p.getId()));
 
                     MainActivity.openHistoryFragment();
                     dialog.dismiss();
