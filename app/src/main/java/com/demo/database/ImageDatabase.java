@@ -238,7 +238,7 @@ public class ImageDatabase extends SQLiteOpenHelper {
             byteArrayOutputStream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             url = byteArrayOutputStream.toByteArray();
-            addNew(new Image(0, url, true, 8)); 
+            addNew(new Image(0, url, true, 8));
 
             bitmapDrawable = (BitmapDrawable) context.getResources().getDrawable(R.drawable.moscow_mule2);
             bitmap = bitmapDrawable.getBitmap();

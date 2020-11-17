@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
@@ -73,7 +74,12 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new SettingFragment();
                         break;
                     case R.id.navigation_map:
-                        fragment = new MapsFragment();
+                        Uri gmmIntentUri = Uri.parse("geo:10.0120585,105.7310684?z=15");
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(mapIntent);
+                        }
                         break;
                 }
 
