@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,13 +29,14 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener{
+public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     private static GoogleApiClient googleApiClient;
     private GoogleSignInOptions gso;
     private EditText editName, editBirthday, editAddress, editEmail, editPhone;
     private RadioButton raMale, raFemale;
-    private Button btnSave;
+    private Button btnSave, btnCancle;
     UserDatabase dbUser;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -53,13 +53,15 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
         btnSave = view.findViewById(R.id.btnSave);
         dbUser = new UserDatabase(getActivity());
         raMale = view.findViewById(R.id.raMale);
-        
+        btnCancle = view.findViewById(R.id.btnCancle);
+
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                int id, String username, String password, String fullname,
 //                String birthday, boolean gender, String gmail, String phone, String address, String dateJoin, boolean status
-                dbUser.addUser(new User(1, "", "", editName.getText().toString(), editBirthday.getText().toString(),
+                dbUser.updateUser(new User(1, "", "", editName.getText().toString(), editBirthday.getText().toString(),
                         raMale.isChecked(), editEmail.getText().toString(), editPhone.getText().toString(), editAddress.getText().toString(), "", true));
                 MainActivity.userId = dbUser.getAllUser().get(dbUser.getAllUser().size() - 1).getId();
                 MainActivity.openHomeFragment();
@@ -67,6 +69,12 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
             }
         });
 
+        btnCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.openHomeFragment();
+            }
+        });
         return view;
     }
 
@@ -78,11 +86,13 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
             editName.setText(in.getDisplayName());
             editEmail.setText(in.getEmail());
             editEmail.setEnabled(false);
+            dbUser.addUser(new User(editName.getText().toString(), editEmail.getText().toString()));
             /* Picasso.get().load(in.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(image);*/
         } else {
 
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -108,14 +118,14 @@ public class UpdateFragment extends Fragment implements GoogleApiClient.OnConnec
                 if (status.isSuccess()) {
 
                     MainActivity.openHomeFragment();
-                }
-                else {
+                } else {
 
 
                 }
             }
         });
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 

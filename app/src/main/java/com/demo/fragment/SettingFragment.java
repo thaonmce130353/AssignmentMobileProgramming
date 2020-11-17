@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.app.Fragment;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,10 +41,10 @@ import java.util.List;
 
 public class SettingFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
 
-    private Button btnSignOut;
+    private Button btnEdit;
     private ImageView image;
-    private TextView nameV;
-    private TextView Email;
+    private TextView txtLogout, txtAbout;
+    private EditText editName, editBirthday, editAddress, editEmail, editPhone;
     private List<User> list = new ArrayList();
     UserDatabase Userdb;
 
@@ -51,17 +52,18 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.setting_fragment, container, false);
+        View view = inflater.inflate(R.layout.setting_fragment, container, false);
 
-        nameV = v.findViewById(R.id.txtNameV2);
-        Email = v.findViewById(R.id.txtEmailV2);
-        /*birthday = v.findViewById(R.id.txtBirthV2);
-        phone = v.findViewById(R.id.txtBirthV3);*/
-        /*image = v.findViewById(R.id.imageView);*/
-        btnSignOut = v.findViewById(R.id.btnLogout);
+        editName = view.findViewById(R.id.editName);
+        editAddress = view.findViewById(R.id.editAddress);
+        editBirthday = view.findViewById(R.id.editBirthday);
+        editPhone = view.findViewById(R.id.editPhone);
+        editEmail = view.findViewById(R.id.editEmail);
+        txtLogout = view.findViewById(R.id.txtLogout);
+        txtAbout = view.findViewById(R.id.txtAbout);
         Userdb = new UserDatabase(getActivity());
 
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
+        txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -69,7 +71,7 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
                 gotoLogin();
             }
         });
-        return v;
+        return view;
 
     }
 
@@ -87,11 +89,6 @@ public class SettingFragment extends Fragment implements GoogleApiClient.OnConne
     private void handlerSigninResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             GoogleSignInAccount in = result.getSignInAccount();
-            nameV.setText(in.getDisplayName());
-            Email.setText(in.getEmail());
-            /*birthday.setText(Userdb.);*/
-
-            /* Picasso.get().load(in.getPhotoUrl()).placeholder(R.mipmap.ic_launcher).into(image);*/
         } else {
             gotoLogin();
         }

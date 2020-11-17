@@ -27,6 +27,11 @@ public class User {
         this.status = status;
     }
 
+    public User(String fullname, String gmail) {
+        this.fullname = fullname;
+        this.gmail = gmail;
+    }
+
     public int getId() {
         return Id;
     }

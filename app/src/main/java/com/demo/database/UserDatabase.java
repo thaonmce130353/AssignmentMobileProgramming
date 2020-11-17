@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.demo.object.info.Product;
 import com.demo.object.info.User;
 
 import java.util.ArrayList;
@@ -25,29 +24,42 @@ public class UserDatabase extends SQLiteOpenHelper {
         /*init();*/
     }
 
-    public void addUser(User user)
-    {
-        db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
-        values.put("fullname", user.getFullname());
-        values.put("birthday", user.getBirthday());
-        values.put("gender", true);
-        values.put("gmail",user.getGmail());
-        values.put("phone", user.getPhone());
-        values.put("address", user.getAddress());
-        values.put("datejoin", user.getDateJoin());
-        values.put("status", true);
-        db.insert(TABLE_USER, null, values);
+    public void addUser(User user) {
+        try {
+            db = getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("username", user.getUsername());
+            values.put("password", user.getPassword());
+            values.put("fullname", user.getFullname());
+            values.put("birthday", user.getBirthday());
+            values.put("gender", true);
+            values.put("gmail", user.getGmail());
+            values.put("phone", user.getPhone());
+            values.put("address", user.getAddress());
+            values.put("datejoin", user.getDateJoin());
+            values.put("status", true);
+            db.insert(TABLE_USER, null, values);
+        } catch (Exception e) {
+
+        }
 
     }
 
-   /* public void updateUser(String gmail, boolean gender, String birthday, String phone, String address)
-    {
+    public void updateUser(User user) {
         db = getWritableDatabase();
-        String sql = String.format("UPDATE * FROM  %s SET gender = "+" '"+gender+"' birthday = "+" '"+birthday+"' phone = "+" '"+phone+"' address = "+" '"+address+"' "+" WHERE gmail = %s", TABLE_USER, gmail);
-    }*/
+        ContentValues values = new ContentValues();
+        // fullname VARCHAR(50), birthday DATETIME, gender INTEGER, gmail VARCHAR(50), phone VACHAR(50), address VARCHAR(50), datejoin  status )");
+        values.put("fullname", user.getFullname());
+        values.put("gender", user.isGender());
+        values.put("phone", user.getPhone());
+        values.put("address", user.getAddress());
+//        values.put("gmail", u);
+//        values.put("birthday", user.getBirthday());
+
+        db.update(TABLE_USER, values, "gmail = '" + user.getGmail() + "'", null);
+
+    }
+
     public ArrayList<User> getAllUser() {
         ArrayList<User> users = new ArrayList<>();
         db = getReadableDatabase();
@@ -68,13 +80,14 @@ public class UserDatabase extends SQLiteOpenHelper {
             boolean status = cursor.getInt(10) > 0;
 
 
-            users.add(new User(id,username,password,fullname,birthday,gender,gmail,phone,address,datejoin,status));
+            users.add(new User(id, username, password, fullname, birthday, gender, gmail, phone, address, datejoin, status));
         }
         return users;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(50), password VARCHAR(50), fullname VARCHAR(50), birthday DATETIME, gender INTEGER, gmail VARCHAR(50), phone VACHAR(50), address VARCHAR(50), datejoin DATETIME, status INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(Id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(50), password VARCHAR(50), fullname VARCHAR(50), birthday DATETIME, gender INTEGER, gmail VARCHAR(50), phone VACHAR(50), address VARCHAR(50), datejoin VARCHAR, status INTEGER)");
 
     }
 

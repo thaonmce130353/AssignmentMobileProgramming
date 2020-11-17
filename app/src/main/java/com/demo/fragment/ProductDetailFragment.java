@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,9 +69,9 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
 
         products = dbProduct.getProductByType(p.getTypeId());
         //remove product current
-        for(Product product : products) {
-            if(p.getId() == product.getId())
-                products.remove(product);
+        for (int i = 0; i < products.size(); i++) {
+            if (p.getId() == products.get(i).getId())
+                products.remove(i);
         }
         carouselView.setImageListener(this);
 
@@ -99,7 +100,7 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
 
         if (p.getPercentSaleOff() != 0) {
 
-            float priceAfterSale = (float) p.getPrice() * ((100 - p.getPercentSaleOff()) / (float)100);
+            float priceAfterSale = (float) p.getPrice() * ((100 - p.getPercentSaleOff()) / (float) 100);
             txtPriceSaleOff.setText(String.format("%1$,.2f$", priceAfterSale));
         } else {
             ((ViewGroup) txtPriceSaleOff.getParent()).removeView(txtPriceSaleOff);
@@ -107,8 +108,10 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
         imgsForCarousel = new ArrayList<>();
 
         ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
-        if (images.size() != 0)
-            imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length));
+        Log.i("Nhannt", images.size() + "");
+        for (int i = 0; i < images.size(); i++) {
+            imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(i).getUrl(), 0, images.get(i).getUrl().length));
+        }
         carouselView = view.findViewById(R.id.carouselProductDetail);
 
         carouselView.setPageCount(imgsForCarousel.size());
