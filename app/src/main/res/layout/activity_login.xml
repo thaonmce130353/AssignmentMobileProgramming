@@ -55,15 +55,15 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="45dp"
         android:layout_marginLeft="45dp"
-        android:layout_marginTop="198dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
         android:background="@drawable/login_gg_custom"
         android:ems="10"
-        android:paddingLeft="10dp"
         android:fontFamily="@font/roboto_regular"
+        android:hint="Username"
         android:inputType="textPersonName"
-        android:hint="Username" />
+        android:paddingLeft="10dp" />
 
     <EditText
         android:id="@+id/txtPasswordLogin"
@@ -116,12 +116,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="170dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="105dp"
-        android:layout_marginEnd="184dp"
-        android:layout_marginRight="184dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:textColor="@color/white"
+        android:textSize="50sp"
+        android:gravity="center"
         android:text="4P Food" />
 
 
