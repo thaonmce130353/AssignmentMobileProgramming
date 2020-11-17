@@ -67,6 +67,11 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
         init(view, p);
 
         products = dbProduct.getProductByType(p.getTypeId());
+        //remove product current
+        for(Product product : products) {
+            if(p.getId() == product.getId())
+                products.remove(product);
+        }
         carouselView.setImageListener(this);
 
         RecyclerView recyclerViewProduct = view.findViewById(R.id.recycle_view_product_detail);
