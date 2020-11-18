@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.demo.fragment.AboutUsFragment;
 import com.demo.fragment.HistoryFragment;
 import com.demo.fragment.HomeFragment;
 import com.demo.fragment.MapsFragment;
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.mainframe, new UpdateFragment());
+                transaction.commit();
+
+                manager = getFragmentManager();
+                transaction = manager.beginTransaction();
                 transaction.replace(R.id.mainframe, new HomeFragment());
                 transaction.commit();
             }
@@ -159,6 +165,19 @@ public class MainActivity extends AppCompatActivity {
             SettingFragment settingFragment = new SettingFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.replace(R.id.mainframe, settingFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } catch (Exception e){
+
+        }
+    }
+
+    public static void openAboutUsFrament()
+    {
+        try {
+            AboutUsFragment aboutUsFragment = new AboutUsFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.mainframe, aboutUsFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         } catch (Exception e){

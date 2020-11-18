@@ -1,44 +1,35 @@
 package com.demo.fragment;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.FragmentActivity;
-
-
-import android.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import com.demo.assignmentmobileprogramming.LoginActivity;
 import com.demo.assignmentmobileprogramming.MainActivity;
 import com.demo.assignmentmobileprogramming.R;
 import com.demo.database.UserDatabase;
 import com.demo.object.info.User;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SettingFragment extends Fragment {
-//    private static GoogleApiClient googleApiClient;
+    //    private static GoogleApiClient googleApiClient;
 //    private GoogleSignInOptions gso;
     private Button btnEdit;
     private ImageView image;
@@ -49,6 +40,7 @@ public class SettingFragment extends Fragment {
     UserDatabase dbUser;
     User user;
     boolean isEdit = false;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -82,7 +74,7 @@ public class SettingFragment extends Fragment {
             editEmail.setText(String.valueOf(user.getGmail()));
 
             raMale.setChecked(user.isGender());
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -98,10 +90,21 @@ public class SettingFragment extends Fragment {
                 gotoLogin();
             }
         });
+
+        txtAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    MainActivity.openAboutUsFrament();
+                } catch (Exception e) {
+
+                }
+            }
+        });
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isEdit){
+                if (isEdit) {
                     try {
                         inactive();
                         isEdit = !isEdit;

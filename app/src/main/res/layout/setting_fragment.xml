@@ -23,13 +23,16 @@
             <TextView
                 android:id="@+id/txtProfile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="45dp"
-                android:text="Profile"
+                android:layout_height="80dp"
+                android:fontFamily="@font/roboto_bold"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/background_button_solid"
+                android:textColor="@color/white"
+
+                android:text="PROFILE"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
             <TextView
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"

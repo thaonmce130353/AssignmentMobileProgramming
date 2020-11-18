@@ -43,9 +43,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        ArrayList<Image> images = dbImage.getImageByProductId(products.get(position).getId());
-        if (images.size() != 0) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(images.get(0).getUrl(), 0, images.get(0).getUrl().length);
+        Image image = dbImage.getOneImageByProductId(products.get(position).getId());
+        if (image != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image.getUrl(), 0, image.getUrl().length);
             holder.imgFood.setImageBitmap(bitmap);
         } else
             holder.imgFood.setImageResource(R.drawable.dessert);

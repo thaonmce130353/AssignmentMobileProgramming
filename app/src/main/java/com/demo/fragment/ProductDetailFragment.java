@@ -100,20 +100,21 @@ public class ProductDetailFragment extends Fragment implements ImageListener {
             btnBuyDetail = view.findViewById(R.id.btnBuyDetail);
 
             txtDescription.setText(p.getDescription());
-            txtPrice.setText(String.format("%1$,.2f$", p.getPrice()));
             txtNameFood.setText(p.getName());
 
             if (p.getPercentSaleOff() != 0) {
 
                 float priceAfterSale = (float) p.getPrice() * ((100 - p.getPercentSaleOff()) / (float) 100);
-                txtPriceSaleOff.setText(String.format("%1$,.2f$", priceAfterSale));
+                txtPriceSaleOff.setText(String.format("%1$,.2f$", p.getPrice()));
+                txtPrice.setText(String.format("%1$,.2f$", priceAfterSale));
             } else {
                 ((ViewGroup) txtPriceSaleOff.getParent()).removeView(txtPriceSaleOff);
+                txtPrice.setText(String.format("%1$,.2f$", p.getPrice()));
             }
             imgsForCarousel = new ArrayList<>();
 
             ArrayList<Image> images = dbImage.getImageByProductId(p.getId());
-            Log.i("Nhannt", images.size() + "");
+
             for (int i = 0; i < images.size(); i++) {
                 imgsForCarousel.add(BitmapFactory.decodeByteArray(images.get(i).getUrl(), 0, images.get(i).getUrl().length));
             }
